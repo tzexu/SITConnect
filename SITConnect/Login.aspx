@@ -95,7 +95,7 @@
 
     <script>
         grecaptcha.ready(function () {
-            grecaptcha.execute('6LdSPlAaAAAAAOPX4PnJOC1tcvuBtr9-PivgpheA', { action: 'Login' }).then(function (token)) {
+            grecaptcha.execute('', { action: 'Login' }).then(function (token)) {
                 document.getElementById("g-recaptcha-response").value = token;
             });
         });
