@@ -24,7 +24,7 @@ namespace SITConnect
 
         //static async Task Execute()
         //{
-        //    var apiKey = Environment.GetEnvironmentVariable("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");
+        //    var apiKey = Environment.GetEnvironmentVariable("");
         //    var client = new SendGridClient(apiKey);
         //    var from = new EmailAddress("test@example.com", "Example User");
         //    var subject = "Sending with SendGrid is Fun";
@@ -45,7 +45,7 @@ namespace SITConnect
                 //{
                 //    Port = 587,
                 //    DeliveryMethod = SmtpDeliveryMethod.Network,
-                //    Credentials = new NetworkCredential("sitconnect1234@gmail.com", "SITconnect1234"),
+                //    Credentials = new NetworkCredential("sitconnect1234@gmail.com", ""),
                 //    Host = "smtp.gmail.com", // for gmail host
                 //    UseDefaultCredentials = false,
                 //    EnableSsl = true
