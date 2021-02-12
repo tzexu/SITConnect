@@ -61,6 +61,8 @@ namespace SITConnect
 
             string email = Session["LoggedIn"].ToString();
 
+            Session["ErrorMsg"] = null;
+
             DateTime now = DateTime.Now;
             DateTime lastPasswordChange = getLastPasswordChange(email);
 
@@ -77,6 +79,9 @@ namespace SITConnect
             else
             {
                 System.Diagnostics.Debug.WriteLine("please wait 2 mins before changing password");
+
+                Session["ErrorMsg"] = "Please wait 2 mins before changing password";
+
             }
             
         }

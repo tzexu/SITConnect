@@ -125,6 +125,7 @@
     <Content Include="CustomError\HTTP404.html" />
     <Content Include="CustomError\HTTP404Error.aspx" />
     <Content Include="CustomError\HTTP500.html" />
+    <Content Include="CustomError\HTTP500Error.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EmailSent.aspx" />
     <Content Include="favicon.ico" />
@@ -316,6 +317,13 @@
     </Compile>
     <Compile Include="CustomError\HTTP404Error.aspx.designer.cs">
       <DependentUpon>HTTP404Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomError\HTTP500Error.aspx.cs">
+      <DependentUpon>HTTP500Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomError\HTTP500Error.aspx.designer.cs">
+      <DependentUpon>HTTP500Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

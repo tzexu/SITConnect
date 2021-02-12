@@ -78,6 +78,15 @@ namespace SITConnect
         protected global::System.Web.UI.WebControls.Label lbl_testing;
 
         /// <summary>
+        /// lbl_errorMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_errorMsg;
+
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>

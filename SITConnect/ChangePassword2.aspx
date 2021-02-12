@@ -13,12 +13,11 @@
 
    
 
-             <asp:TableRow>
                     <asp:TableCell>
                         <asp:Label ID="Label11" runat="server" Text="Enter New Password"></asp:Label><span style="color: #FF0000">&nbsp;*</span>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox ID="tb_password" runat="server" Height="36px" Width="280px" keyup="" onkeyup="btn_checkpassword_click"></asp:TextBox>
+                        <asp:TextBox ID="tb_password" runat="server" Height="36px" Width="280px" TextMode="Password" onkeyup=""></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
                         <img id="hide_show_password" src="Images/hide_password.svg" style="position:relative; left:-55px;" onclick="javascript:hide_or_show_pw()" width="25" height="25" />
@@ -33,7 +32,7 @@
                         <asp:Label ID="Label12" runat="server" Text="Confirm New Password"></asp:Label><span style="color: #FF0000">&nbsp;*</span>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox ID="tb_confirmPassword" runat="server" Height="36px" Width="280px"></asp:TextBox>
+                        <asp:TextBox ID="tb_confirmPassword" runat="server" Height="36px" Width="280px" TextMode="Password"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell>
                         <img id="hide_show_cfm_password" src="Images/hide_password.svg" style="position:relative; left:-55px;" onclick="javascript:hide_or_show_pw()" width="25" height="25" />
@@ -79,6 +78,9 @@
 </script>
 
 
+<asp:Label ID="lbl_errorMsg" runat="server" Text=""></asp:Label>
+
+<br />
 
 
 <asp:Button ID="Button1" runat="server" OnClick="btn_changePassword_Click" Text="Change Password" Width="437px" />

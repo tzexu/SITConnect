@@ -35,6 +35,9 @@ namespace SITConnect
             System.Diagnostics.Debug.WriteLine("go to AccountRecovery");
 
 
+            Session["Email"] = tb_email_Login.Text;
+
+
             Response.Redirect("AccountRecovery.aspx");
         }
 

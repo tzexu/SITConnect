@@ -26,6 +26,10 @@
                     </asp:TableCell>
                     <asp:TableCell>
                         <asp:TextBox ID="tb_firstName" runat="server" Height="36px" Width="280px"></asp:TextBox>
+                        <%--<asp:TextBox ID="TextBox1" runat="server" Height="36px" Width="280px"></asp:TextBox>--%>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:RequiredFieldValidator ID="reqFirstName" ControlToValidate="tb_firstName" ValidationGroup="Registration" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>  
                     </asp:TableCell>
                 </asp:TableRow>
 
@@ -52,7 +56,7 @@
                         <asp:Label ID="Label9" runat="server" Text="Credit Card Number"></asp:Label><span style="color: #FF0000">&nbsp;*</span>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox ID="tb_creditCardNum" runat="server" Height="36px" Width="280px" TextMode="Number"></asp:TextBox>
+                        <asp:TextBox ID="tb_creditCardNum" runat="server" Height="36px" Width="280px" TextMode="Number" MinLength="16" MaxLength="16"></asp:TextBox>
                     </asp:TableCell>
                 </asp:TableRow>
 
@@ -533,11 +537,11 @@
     </script>
         
 <p>
-    <asp:Button ID="Button1" runat="server" OnClick="btn_checkPassword_Click" Text="Check Password" Width="437px" />
+    <%--<asp:Button ID="Button1" runat="server" OnClick="btn_checkPassword_Click" Text="Check Password" Width="437px" />--%>
     <%--<asp:Button ID="Button2" runat="server"  Text="Register" OnClick="thefun()" Width="430px" />--%>
 
     
-    <asp:Label ID="lbl_test" runat="server" Text="thelabel"></asp:Label>
+    <%--<asp:Label ID="lbl_test" runat="server" Text="thelabel"></asp:Label>--%>
 </p>
 
 

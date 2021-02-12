@@ -5,12 +5,23 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using System.Drawing; //to change color
+
 namespace SITConnect
 {
     public partial class _Default : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            
+            if (Session["ErrorMsg"] != null)
+            {
+                lbl_errorMsg.Text = Session["ErrorMsg"].ToString();
+                lbl_errorMsg.ForeColor = Color.Red;
+            }
+
+            
             if (Session["LoggedIn"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
                 
@@ -22,7 +33,7 @@ namespace SITConnect
                 {
                     System.Diagnostics.Debug.WriteLine("Login is successful");
 
-                    Session["User"] = "tom";
+                    //Session["User"] = "tom";
                 }
                 
                 

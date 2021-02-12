@@ -6,7 +6,20 @@
 <br />
 
 
-<h3>403 Error Has Occurred</h3>
+
+    <div>
+        <h1>Forbidden Error <small>403</small></h1>
+        <p class="lead">Access to requested resource is forbidden.</p>
+
+
+        <asp:Button ID="btn_HomePage" runat="server" style="padding:15px;" Text="Return to Home Page"></asp:Button>
+
+    </div>
+
+    <br />
+    
+
+    <footer><p>Technical Contact: <a href="mailto:x@example.com">help@sitconnect.com</a></p></footer>
 
 
 

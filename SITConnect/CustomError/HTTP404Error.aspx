@@ -11,11 +11,11 @@
         <p class="lead">The requested resource could not be found but may be available again in the future.</p>
 
 
-        <asp:Button ID="btn_HomePage" runat="server" style="padding:15px;" >Return to Home Page</asp:Button>
+        <asp:Button ID="btn_HomePage" runat="server" style="padding:15px;" Text="Return to Home Page"></asp:Button>
 
     </div>
 
-    
+    <br />
 
     <footer><p>Technical Contact: <a href="mailto:x@example.com">help@sitconnect.com</a></p></footer>
 

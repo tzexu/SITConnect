@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace SITConnect.CustomError
 {
-    public partial class HTTP403Error : System.Web.UI.Page
+    public partial class HTTP500Error : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,8 +16,10 @@ namespace SITConnect.CustomError
 
         protected void btn_returnToHomePage(object sender, EventArgs e)
         {
+
+            System.Diagnostics.Debug.WriteLine("but the code is executed");
+            
             Response.Redirect("Default.aspx");
         }
-
     }
 }

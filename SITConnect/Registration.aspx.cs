@@ -41,6 +41,8 @@ namespace SITConnect
             //this works fine
             //tb_password.Attributes.Add("onKeyUp", "alert('test');");
 
+            //tb_firstName.Attributes.Add(required);
+
             tb_password.Attributes.Add("onKeyUp", "validate();");
 
             tb_password.Attributes.Add("type", "password");
@@ -65,7 +67,7 @@ namespace SITConnect
 
             string password = tb_password.Text;
 
-            lbl_test.Text = "yo";
+            //lbl_test.Text = "yo";
 
             
             
@@ -255,7 +257,24 @@ namespace SITConnect
             }
             else
             {
-                lbl_testing.Text = "fail";
+                
+                //
+                
+                if (password.Length < 12)
+                {
+                    //lbl_testing.Text = "fail";
+                    System.Diagnostics.Debug.WriteLine("fail");
+
+                    //errorMsg.Text
+
+                    // 
+
+                }
+
+                    //lbl_testing.Text = "fail";
+                    System.Diagnostics.Debug.WriteLine("fail");
+                // 
+
             }
 
            
@@ -293,8 +312,8 @@ namespace SITConnect
                             cmd.Parameters.AddWithValue("@PasswordHash", finalHash);
                             cmd.Parameters.AddWithValue("@PasswordSalt", salt);
 
-                            cmd.Parameters.AddWithValue("@PasswordHash2", null);
-                            cmd.Parameters.AddWithValue("@PasswordSalt2", null);
+                            cmd.Parameters.AddWithValue("@PasswordHash2", "y");
+                            cmd.Parameters.AddWithValue("@PasswordSalt2", "y");
 
                             cmd.Parameters.AddWithValue("@DateTimeRegistered", DateTime.Now);
 

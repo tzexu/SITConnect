@@ -18,6 +18,7 @@
 </head>
 <body>
     <form runat="server">
+
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -38,6 +39,9 @@
             </Scripts>
         </asp:ScriptManager>
 
+
+        <div id="successMsg" class="alert alert-success" style="display:none;" role="alert"></div>
+        <div id="errorMsg" class="alert alert-danger" style="display:none;" role="alert"></div>
 
 
         <nav class= "navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -66,10 +70,11 @@
                 <% if (Session["LoggedIn"] != null) { %>
                         <ul class="navbar-nav navbar-right">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdown05″>Dropdown <span class="caret">Hello @Session["User"]</span></a>
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdown05″>Dropdown <span class="caret">Welcome User  <%--`@Session["LoggedIn"]`--%></span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="javascript:document.getElementById('<%= btn_Logout.ClientID %>').click();">Log Out</a>
                                 <a class="dropdown-item" href="javascript:document.getElementById('<%= btn_ChangePassword.ClientID %>').click();" >Change Password</a>
+                                <a class="dropdown-item" href="javascript:document.getElementById('<%= btn_Logout.ClientID %>').click();">Log Out</a>
+                                
                             </div>
                         </li>
                     </ul>
@@ -114,6 +119,13 @@
                 </div>
             </div>
         </div>--%>
+
+        
+
+
+        
+
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

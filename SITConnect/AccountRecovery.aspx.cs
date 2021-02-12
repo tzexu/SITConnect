@@ -92,6 +92,8 @@ namespace SITConnect
             string htmlString = greeting + "Click here to reset your password: https://localhost:44381/ChangePassword2" + closing;
             Email(htmlString, email); //Pass html string to Email function.  
 
+            //Session["Email"] = email;
+
             Response.Redirect("EmailSent.aspx");
 
         }

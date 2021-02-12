@@ -31,103 +31,124 @@ namespace SITConnect
         protected void btn_changePassword_Click(object sender, EventArgs e)
         {
             string old_pwd = HttpUtility.HtmlEncode(tb_old_password.Text.ToString().Trim());
-            string email = Session["LoggedIn"].ToString();
-            SHA512Managed hashing = new SHA512Managed();
-            string dbHash = getDBHash(email);
-            string dbSalt = getDBSalt(email);
+
+            string new_pwd = HttpUtility.HtmlEncode(tb_password.Text.ToString().Trim());
+
+            System.Diagnostics.Debug.WriteLine("old password: " + old_pwd);
+            System.Diagnostics.Debug.WriteLine("new password: " + new_pwd);
 
 
-            try
+            if (old_pwd != new_pwd)
             {
-                if (dbSalt != null && dbSalt.Length > 0 && dbHash != null && dbHash.Length > 0)
+
+                string email = Session["LoggedIn"].ToString();
+                SHA512Managed hashing = new SHA512Managed();
+                string dbHash = getDBHash(email);
+                string dbSalt = getDBSalt(email);
+
+
+                try
                 {
-                    string pwdWithSalt = old_pwd + dbSalt;
-                    byte[] hashWithSalt = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwdWithSalt));
-                    string userHash = Convert.ToBase64String(hashWithSalt);
-
-                    if (userHash.Equals(dbHash))
+                    if (dbSalt != null && dbSalt.Length > 0 && dbHash != null && dbHash.Length > 0)
                     {
-                        System.Diagnostics.Debug.WriteLine("Old Password Matches Password in Database");
+                        string pwdWithSalt = old_pwd + dbSalt;
+                        byte[] hashWithSalt = hashing.ComputeHash(Encoding.UTF8.GetBytes(pwdWithSalt));
+                        string userHash = Convert.ToBase64String(hashWithSalt);
 
-                        string new_pwd = HttpUtility.HtmlEncode(tb_password.Text.ToString().Trim());
-
-                        //Server Side Check making sure password does indeed meet all the complexity requirements stated in "Password Complexity Requirements"
-                        if ((new_pwd.Length >= 12) && (Regex.IsMatch(new_pwd, "[a-z]")) && (Regex.IsMatch(new_pwd, "[A-Z]")) && (Regex.IsMatch(new_pwd, "[0-9]")) && (Regex.IsMatch(new_pwd, "[^a-zA-Z0-9]")))
+                        if (userHash.Equals(dbHash))
                         {
-                            //lbl_testing.Text = "success";
-                            System.Diagnostics.Debug.WriteLine("success");
+                            System.Diagnostics.Debug.WriteLine("Old Password Matches Password in Database");
+
+                            //string new_pwd = HttpUtility.HtmlEncode(tb_password.Text.ToString().Trim());
 
 
-                            //SqlConnection connection = new SqlConnection(SITCONNECTDBConnectionString);
-                            //string sql = "update Account SET PasswordHash=@PASSWORDHASH, PasswordSalt=@PASSWORDSALT, IV=@IV, Key=@KEY WHERE Email=@EMAIL";
-                            //SqlCommand cmd = new SqlCommand(sql, connection);
-                            //cmd.Parameters.AddWithValue("@EMAIL", email);
+
+                            //Server Side Check making sure password does indeed meet all the complexity requirements stated in "Password Complexity Requirements"
+                            if ((new_pwd.Length >= 12) && (Regex.IsMatch(new_pwd, "[a-z]")) && (Regex.IsMatch(new_pwd, "[A-Z]")) && (Regex.IsMatch(new_pwd, "[0-9]")) && (Regex.IsMatch(new_pwd, "[^a-zA-Z0-9]")))
+                            {
+                                //lbl_testing.Text = "success";
+                                System.Diagnostics.Debug.WriteLine("success");
 
 
-                            //Generate random "salt"
-                            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-                            byte[] saltByte = new byte[8];
-
-                            //Fills array of bytes with a cryptographically strong sequence of random values.
-                            rng.GetBytes(saltByte);
-                            salt = Convert.ToBase64String(saltByte);
-
-                            SHA512Managed hashing2 = new SHA512Managed();
-
-                            string pwdWithSalt2 = new_pwd + salt;
-                            byte[] plainHash = hashing2.ComputeHash(Encoding.UTF8.GetBytes(new_pwd));
-                            byte[] hashWithSalt2 = hashing2.ComputeHash(Encoding.UTF8.GetBytes(pwdWithSalt2));
-
-                            finalHash = Convert.ToBase64String(hashWithSalt2);
+                                //SqlConnection connection = new SqlConnection(SITCONNECTDBConnectionString);
+                                //string sql = "update Account SET PasswordHash=@PASSWORDHASH, PasswordSalt=@PASSWORDSALT, IV=@IV, Key=@KEY WHERE Email=@EMAIL";
+                                //SqlCommand cmd = new SqlCommand(sql, connection);
+                                //cmd.Parameters.AddWithValue("@EMAIL", email);
 
 
-                            RijndaelManaged cipher = new RijndaelManaged();
-                            cipher.GenerateKey();
-                            Key = cipher.Key;
-                            IV = cipher.IV;
+                                //Generate random "salt"
+                                RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+                                byte[] saltByte = new byte[8];
 
-                            //SqlConnection connection = new SqlConnection(SITCONNECTDBConnectionString);
-                            //string sql = "update Account SET PasswordHash=@PASSWORDHASH, PasswordSalt=@PASSWORDSALT, IV=@IV, Key=@KEY WHERE Email=@EMAIL";
-                            //SqlCommand cmd = new SqlCommand(sql, connection);
-                            //cmd.Parameters.AddWithValue("@EMAIL", email);
+                                //Fills array of bytes with a cryptographically strong sequence of random values.
+                                rng.GetBytes(saltByte);
+                                salt = Convert.ToBase64String(saltByte);
 
-                            updatePassword();
+                                SHA512Managed hashing2 = new SHA512Managed();
+
+                                string pwdWithSalt2 = new_pwd + salt;
+                                byte[] plainHash = hashing2.ComputeHash(Encoding.UTF8.GetBytes(new_pwd));
+                                byte[] hashWithSalt2 = hashing2.ComputeHash(Encoding.UTF8.GetBytes(pwdWithSalt2));
+
+                                finalHash = Convert.ToBase64String(hashWithSalt2);
 
 
-                            Response.Redirect("Default.aspx", false);
+                                RijndaelManaged cipher = new RijndaelManaged();
+                                cipher.GenerateKey();
+                                Key = cipher.Key;
+                                IV = cipher.IV;
+
+                                //SqlConnection connection = new SqlConnection(SITCONNECTDBConnectionString);
+                                //string sql = "update Account SET PasswordHash=@PASSWORDHASH, PasswordSalt=@PASSWORDSALT, IV=@IV, Key=@KEY WHERE Email=@EMAIL";
+                                //SqlCommand cmd = new SqlCommand(sql, connection);
+                                //cmd.Parameters.AddWithValue("@EMAIL", email);
+
+                                updatePassword();
 
 
-                            //MyDBServiceReference.Service1Client client = new MyDBServiceReference.Service1Client();
-                            //int result = client.CreateEmployee(tbNric.Text, tbName.Text, dob, ddlDept.Text, wage);
+                                Response.Redirect("Default.aspx", false);
 
-                        }
-                        else
-                        {
-                            //lbl_testing.Text = "your new password does not meet password requirements";
 
-                            System.Diagnostics.Debug.WriteLine("your new password does not meet password requirements");
+                                //MyDBServiceReference.Service1Client client = new MyDBServiceReference.Service1Client();
+                                //int result = client.CreateEmployee(tbNric.Text, tbName.Text, dob, ddlDept.Text, wage);
+
+                            }
+                            else
+                            {
+                                //lbl_testing.Text = "your new password does not meet password requirements";
+
+                                System.Diagnostics.Debug.WriteLine("your new password does not meet password requirements");
+
+                            }
+
 
                         }
 
 
                     }
 
-
                 }
-                
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+                finally { }
+
+
+
+                System.Diagnostics.Debug.WriteLine("Password changed successfully");
+
+
+                Response.Redirect("Default.aspx");
+
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception(ex.ToString());
+                System.Diagnostics.Debug.WriteLine("New Password cannot be the same as Old Password!");
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
-            finally { }
-
-        
-
-            System.Diagnostics.Debug.WriteLine("Password changed successfully");
 
             
-            Response.Redirect("Default.aspx");
         }
 
 
